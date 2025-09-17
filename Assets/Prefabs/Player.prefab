@@ -189,6 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e61430ab9e57479bbe0505b77dc6d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 3
+  angleZ: -90
+  spotLight: {fileID: 5270488705582795065}
 --- !u!1 &5270488705582795065
 GameObject:
   m_ObjectHideFlags: 0
