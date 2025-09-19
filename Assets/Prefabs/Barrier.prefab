@@ -5015,6 +5015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437597869300731163}
   - component: {fileID: 1646355502012993020}
+  - component: {fileID: 6415865230547117038}
   m_Layer: 0
   m_Name: Barrier
   m_TagString: Barrier
@@ -5076,3 +5077,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2
+--- !u!114 &6415865230547117038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507517346873314850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ebf03111b244da58e2d14e7d4b3db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteTime: 3
