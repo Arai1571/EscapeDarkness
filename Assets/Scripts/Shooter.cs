@@ -20,7 +20,6 @@ public class Shooter : MonoBehaviour
     {
         //スペースキーを押したらお札を投擲
         if (Input.GetButtonDown("Jump")) Shoot();
-
     }
 
     public void Shoot()

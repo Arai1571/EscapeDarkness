@@ -205,6 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b54af15009ca43d980af158b3cc3155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  billPrefab: {fileID: 4977608721448547946, guid: f70145df9a8860a4c9c10a8d0cefd802, type: 3}
+  shootSpeed: 4
+  shootDelay: 0.25
 --- !u!1 &5270488705582795065
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723602656122095734}
   - component: {fileID: 4149604816358976722}
+  - component: {fileID: 4401933307838441999}
   m_Layer: 0
   m_Name: SpotLight
   m_TagString: Untagged
@@ -230,13 +234,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5270488705582795065}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 476645361496509928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &4149604816358976722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +293,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4401933307838441999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270488705582795065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421ff384185d740ed8d0a74a8b4157f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
