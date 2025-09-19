@@ -18,15 +18,19 @@ public class BillData : MonoBehaviour
         {
             GameManager.bill++;  //１増やす
             GameManager.itemsPickedState[itemNum] = true;  //該当する取得フラグ(ItemsState)をtrue(ON)にする
+
             //アイテム取得演出
-            //コライダーを無効化
+            //①コライダーを無効化
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            //Rigidbody2Dの復活（Dynamicにする）
+
+            //②Rigidbody2Dの復活（Dynamicにする）
             rbody.bodyType = RigidbodyType2D.Dynamic;
-            //上に打ち上げる（上向き５の力）
+
+            //③上に打ち上げる（上向き５の力）
             rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse); 
-            //オブジェクトを削除する
-            Destroy(collision.gameObject); 
+
+            //④自分自身（お札のゲームオブジェクトごと）の存在を抹消する（0.5秒後）
+            Destroy(gameObject,0.5f); 
         }
    }
 }

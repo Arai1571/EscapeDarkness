@@ -15,14 +15,14 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameState gameState; //ゲームのステータス
-    public static bool[] doorOpenedState; //ドアの開閉状況
+    public static bool[] doorOpenedState={false,false,false}; //ドアの開閉状況
     public static int key1;
     public static int key2;
     public static int key3;
-    public static bool[] keysPickedState; //鍵の取得状況
+    public static bool[] keysPickedState={false,false,false}; //鍵の取得状況
 
     public static int bill = 10; //お札の残数
-    public static bool[] itemsPickedState; //アイテムの所持状況
+    public static bool[] itemsPickedState={false,false,false,false,false}; //アイテムの所持状況
 
     public static bool hasSpotLight; // スポットライトを所持しているかどうか。
 
