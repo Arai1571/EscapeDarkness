@@ -37,7 +37,7 @@ public class RoomData : MonoBehaviour
     }
 
     //ドアの開閉状況をチェックするメソッド
-    public void DoorOpenedCheck()
+    public void DoorOpenCheck()
     {
         //もし開錠されていたら子オブジェクトである変数doorは非表示
         if (openedDoor) door.SetActive(false);

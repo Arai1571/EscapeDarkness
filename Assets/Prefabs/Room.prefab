@@ -82,6 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d0aa4cb94d24f0281809cb1998ac2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: fromRoom1
+  nextRoomName: Room1
+  nextScene: Main
+  openedDoor: 0
+  direction: 1
+  message: {fileID: 11400000, guid: 837e0726b1db8420a939e2ff08962574, type: 2}
+  door: {fileID: 9010675692725955985}
 --- !u!1 &9010675692725955985
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +101,7 @@ GameObject:
   - component: {fileID: 3810806997549520430}
   - component: {fileID: 5104639193702452576}
   - component: {fileID: 3913082474584890694}
+  - component: {fileID: 468791893161240473}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -253,3 +261,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.039364934, y: 0.02402258}
   m_Radius: 1.6407193
+--- !u!114 &468791893161240473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010675692725955985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd6b7b4b28e46de8b276c15c3f4d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomData: {fileID: 8188161142933645677}
