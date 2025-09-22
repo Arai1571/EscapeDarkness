@@ -45,18 +45,20 @@ public class TalkController : MonoBehaviour
     //TalkProcessコルーチンの作成
     IEnumerator TalkProcess()
     {
-        //対象としたScript
+        //対象としたScriptableObject(変数message)が扱っている入れるmsgArrayの数だけ繰り返す
         for (int i = 0; i < message.msgArray.Length; i++)
         {
             nameText.text = message.msgArray[i].name;
             messageText.text = message.msgArray[i].message;
 
-            while (!Input.GetKeyDown(KeyCode.E))//Eキーが押されて”いない”間
+            yield return new WaitForSecondsRealtime(0.1f);  //0.1秒待つ
+
+            while (!Input.GetKeyDown(KeyCode.E))//Eキーが押されて”いない”間(押されるまで)
             {
                 yield return null;  //何もしない
             }
         }
-         EndConversation();
+         EndConversation(); //トーク終了の処理
     }
 
     void EndConversation()
