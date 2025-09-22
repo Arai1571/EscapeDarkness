@@ -64,14 +64,14 @@ public class RoomManager : MonoBehaviour
         //Keyの生成とobjへの格納
         obj = Instantiate(key, keySpot.transform.position, Quaternion.identity);
         //生成したKeyのタイプをkey2に変換
-        obj.GetComponent<Keydata>().keyType = KeyType.key2;
+        obj.GetComponent<KeyData>().keyType = KeyType.key2;
 
         //Key3スポットの取得
         keySpot = GameObject.FindGameObjectWithTag("KeySpot3");
         //Keyの生成とobjへの格納
         obj = Instantiate(key, keySpot.transform.position, Quaternion.identity);
         //生成したKeyのタイプをkey3に変換
-        obj.GetComponent<Keydata>().keyType = KeyType.key3;
+        obj.GetComponent<KeyData>().keyType = KeyType.key3;
     }
 
 
@@ -96,7 +96,7 @@ public class RoomManager : MonoBehaviour
 
     void StartDoorsPosition()
     {
-        //全スポットの
+        //全スポットの取得
         GameObject[] roomSpots = GameObject.FindGameObjectsWithTag("RoomSpot");
 
         //出入り口(鍵１〜鍵３の３つの出入り口)の分だけ繰り返し
@@ -130,7 +130,7 @@ public class RoomManager : MonoBehaviour
                 {
                     //ルームを生成する
                     GameObject obj = Instantiate(room, spots.transform.position, Quaternion.identity);
-                    //何番スポットが選ばれたのかStaticに
+                    //何番スポットが選ばれたのかStatic変数に記憶していく
                     doorsPositionNumber[i] = rand;
                 }
             }

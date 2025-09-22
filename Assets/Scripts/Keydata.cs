@@ -9,7 +9,7 @@ public enum KeyType
     key3
 }
 
-public class Keydata : MonoBehaviour
+public class KeyData : MonoBehaviour
 {
     public KeyType keyType = KeyType.key1; //識別タイプ
     Rigidbody2D rbody;
