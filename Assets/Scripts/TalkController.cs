@@ -6,7 +6,7 @@ public class TalkController : MonoBehaviour
 {
 
     public MessageData message;   //ScriptableObject情報
-    bool isPlayerRange;           //プレイヤーが領域に入ったかどうか
+    bool isPlayerInRange;           //プレイヤーが領域に入ったかどうか
     bool isTalk;                  //トークが開始されたかどうか
     GameObject canvas;            //トークUIを含んだCanvasオブジェクト
     GameObject talkPanel;         //対象となるトークUIパネル
@@ -25,7 +25,7 @@ public class TalkController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerRange && !isTalk && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && !isTalk && Input.GetKeyDown(KeyCode.E))
         {
             StartConversation();  //トーク開始
         }
@@ -56,13 +56,15 @@ public class TalkController : MonoBehaviour
                 yield return null;  //何もしない
             }
         }
-        void EndConversation()
-        {
-            talkPanel.SetActive(false);
-            GameManager.gameState = GameState.playing; //ゲームステータスをPlaying
-            isTalk = false;  //トーク中を解除
-            Time.timeScale = 1.0f; //ゲームスピードを元に戻す
-        }
+         EndConversation();
+    }
+
+    void EndConversation()
+    {
+        talkPanel.SetActive(false);
+        GameManager.gameState = GameState.playing; //ゲームステータスをPlaying
+        isTalk = false;  //トーク中を解除
+        Time.timeScale = 1.0f; //ゲームスピードを元に戻す
     }
 
 
@@ -72,16 +74,16 @@ public class TalkController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //フラグがON
-            isPlayerRange = true;
+            isPlayerInRange = true;
         }
     }
-    private void OnTriggerExsit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         //プレイヤーが領域からでたら
         if (collision.gameObject.CompareTag("Player"))
         {
             //フラグがOFF
-            isPlayerRange = false;
+            isPlayerInRange = false;
         }
     }
 }
