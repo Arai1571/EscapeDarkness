@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TalkController : MonoBehaviour
 {
-
     public MessageData message;   //ScriptableObject情報
     bool isPlayerInRange;           //プレイヤーが領域に入ったかどうか
     bool isTalk;                  //トークが開始されたかどうか
@@ -19,7 +18,6 @@ public class TalkController : MonoBehaviour
         talkPanel = canvas.transform.Find("TalkPanel").gameObject;
         nameText = talkPanel.transform.Find("NameText").GetComponent<TextMeshProUGUI>();
         messageText = talkPanel.transform.Find("MessageText").GetComponent<TextMeshProUGUI>();
-
     }
 
     // Update is called once per frame
@@ -58,7 +56,7 @@ public class TalkController : MonoBehaviour
                 yield return null;  //何もしない
             }
         }
-         EndConversation(); //トーク終了の処理
+        EndConversation(); //トーク終了の処理
     }
 
     void EndConversation()

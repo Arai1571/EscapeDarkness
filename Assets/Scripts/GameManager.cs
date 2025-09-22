@@ -15,7 +15,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameState gameState; //ゲームのステータス
-    public static bool[] doorOpenedState={false,false,false}; //ドアの開閉状況
+    public static bool[] doorsOpenedState={false,false,false}; //ドアの開閉状況
     public static int key1;
     public static int key2;
     public static int key3;
