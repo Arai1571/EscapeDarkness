@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         //プレイ中でなければ何もしない
         if (GameManager.gameState != GameState.playing) return;
-        
+
         Move(); //上下左右の入力値の取得
         angleZ = GetAngle();//その時の角度を変数angleZに反映
         Animation();  //angleZを利用してアニメーション
@@ -206,5 +206,11 @@ public class PlayerController : MonoBehaviour
         anime.SetTrigger("dead");   //死亡アニメクリップの発動
         rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse); //上に跳ね上げる
         Destroy(gameObject, 1.0f); //１秒後に存在を消去
+    }
+
+    //スポットライトの入手フラグが立っていたらライトをつける
+    public void SpotLightCheck()
+    {
+        if (GameManager.hasSpotLight) spotLight.SetActive(true);
     }
 }

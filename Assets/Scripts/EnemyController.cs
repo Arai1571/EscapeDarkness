@@ -8,27 +8,27 @@ public class EnemyController : MonoBehaviour
     // 移動スピード
     public float speed = 0.5f; // 反応距離
     public float reactionDistance = 4.0f;
-    float axisH;                //横軸値(-1.0 ~ 0.0 ~ 1.0)
-    float axisV;                //縦軸値(-1.0 ~ 0.0 ~ 1.0)
+    float axisH;                //横軸値x(-1.0 ~ 0.0 ~ 1.0)
+    float axisV;                //縦軸値y(-1.0 ~ 0.0 ~ 1.0)
 
     Rigidbody2D rbody;          //Rigidbody 2D
     Animator animator;          //Animator
 
     bool isActive = false;      //アクティブフラグ
-    public int arrangeId = 0;   //配置の識別に使う
+    //public int arrangeId = 0;   //配置の識別に使う
 
 
-    public bool onBarrier; //バリアにあたっているか
+    public bool onBarrier; //バリア(お札)にあたっているか
     GameObject player; //プレイヤー情報
 
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();    // Rigidbody2Dを得る
         animator = GetComponent<Animator>();    //Animatorを得る
-        player = GameObject.FindGameObjectWithTag("Player"); //プレイヤー情報を得る
+        player = GameObject.FindGameObjectWithTag("Player"); //プレイヤー情報を得る.startで一度だけ
     }
 
-    void Update()
+    void Update() //Playerを追いかける
     {
         //playingモードでないと何もしない
         if (GameManager.gameState != GameState.playing) return;
@@ -43,15 +43,15 @@ public class EnemyController : MonoBehaviour
         axisH = 0;
         axisV = 0;
 
-        // プレイヤーとの距離チェック
-        float dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist < reactionDistance)
+        // Playerとの距離をチェック
+        float dist = Vector2.Distance(transform.position, player.transform.position); 
+        if (dist < reactionDistance) //reactionDistanceよりも小さかったら
         {
-            isActive = true;    // アクティブにする
+            isActive = true;    // アクティブにする（追いかける）
         }
         else
         {
-            isActive = false;    // 非アクティブにする
+            isActive = false;    // 非アクティブにする（止まる）
         }
 
         // アニメーションを切り替える
@@ -60,12 +60,12 @@ public class EnemyController : MonoBehaviour
         if (isActive)
         {
             animator.SetBool("IsActive", isActive);
-            // プレイヤーへの角度を求める
+            // プレイヤーへの角度を求める(プレイヤーの位置の座標からエネミーの座標を引くと底辺と高さが算出される。底辺と高さから角度算出->アークタンジェント。）
 
             float dx = player.transform.position.x - transform.position.x;
             float dy = player.transform.position.y - transform.position.y;
 
-            float rad = Mathf.Atan2(dy, dx);
+            float rad = Mathf.Atan2(dy, dx);  //アークタンジェントで角度を算出
             float angle = rad * Mathf.Rad2Deg;
 
             // 移動角度でアニメーションを変更する
@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //バリアに当たった時
     {
         //playingモードでないと何もしない
         if (GameManager.gameState != GameState.playing) return;

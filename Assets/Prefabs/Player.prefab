@@ -305,3 +305,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421ff384185d740ed8d0a74a8b4157f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCnt: {fileID: 5041588251129969388}
+  rotationSpeed: 20

@@ -191,6 +191,26 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
+
+        //ダミー扉の生成
+        foreach (GameObject spots in roomSpots)
+        {
+            //すでに配置済みかどうか。済みならtrue,まだならfalse
+            bool match = false;
+
+            foreach (int doorsNum in doorsPositionNumber)
+            {
+                if (spots.GetComponent<RoomSpot>().spotNum == doorsNum)
+                {
+                    match = true;  //そのスポット番号にはすでに配置済み
+                    break;
+                }
+            }
+
+            //数字がマッチしていなければこれまで何も配置されていないということなのでダミードアを配置
+            if (!match) Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
+
+        }
     }
 
     //生成したドアのセッティング
@@ -284,7 +304,7 @@ public class RoomManager : MonoBehaviour
     }
     void LoadDoorsPosition()
     {
-         //全スポットの取得
+        //全スポットの取得
         GameObject[] roomSpots = GameObject.FindGameObjectsWithTag("RoomSpot");
 
         //出入り口(鍵１〜鍵３の３つの出入り口)の分だけ繰り返し
@@ -309,6 +329,25 @@ public class RoomManager : MonoBehaviour
                         messages[i]);
                 }
             }
+        }
+        
+        //ダミー扉の生成
+        foreach (GameObject spots in roomSpots)
+        {
+            //すでに配置済みかどうか。済みならtrue,まだならfalse
+            bool match = false;
+
+            foreach (int doorsNum in doorsPositionNumber)
+            {
+                if (spots.GetComponent<RoomSpot>().spotNum == doorsNum)
+                {
+                    match = true;  //そのスポット番号にはすでに配置済み
+                    break;
+                }
+            }
+
+            //数字がマッチしていなければこれまで何も配置されていないということなのでダミードアを配置
+            if (!match) Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
         }
     }
 }
