@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rbody;
     Animator anime;
 
+    bool isVirtual;  //ヴァーチャルパッドを触っているかどうかの判断フラグ
+
     void Start()
     {
         //コンポーネントの取得
@@ -78,9 +80,12 @@ public class PlayerController : MonoBehaviour
     //上下左右の入力値の取得
     public void Move()
     {
-        //axisHとaxisVに入力状況を代入する
-        axisH = Input.GetAxisRaw("Horizontal"); // 左右キー
-        axisV = Input.GetAxisRaw("Vertical");   // 上下キー
+        if (!isVirtual) //ヴァーチャルパッドを触っていないのであれば
+        {
+            //axisHとaxisVに入力状況を代入する
+            axisH = Input.GetAxisRaw("Horizontal"); // 左右キー
+            axisV = Input.GetAxisRaw("Vertical");   // 上下キーÏ
+        }
     }
 
     //その時のプレイヤーの角度を取得するメソッド
@@ -212,5 +217,21 @@ public class PlayerController : MonoBehaviour
     public void SpotLightCheck()
     {
         if (GameManager.hasSpotLight) spotLight.SetActive(true);
+    }
+
+    //ヴァーチャルパットの入力に反応する条件分岐メソッド
+    public void SetAxis(float virH, float virV)
+    {
+        //どちらかの引数に値が入って入れば
+        if (virH != 0 || virV != 0)
+        {
+            isVirtual = true;
+            axisH = virH;
+            axisV = virV;
+        }
+        else //ヴァーチャルパッドが触れられていない（引数が両方０）なら
+        {
+            isVirtual = false;
+        }
     }
 }

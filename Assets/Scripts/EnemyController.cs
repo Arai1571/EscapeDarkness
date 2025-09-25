@@ -44,7 +44,7 @@ public class EnemyController : MonoBehaviour
         axisV = 0;
 
         // Playerとの距離をチェック
-        float dist = Vector2.Distance(transform.position, player.transform.position); 
+        float dist = Vector2.Distance(transform.position, player.transform.position);
         if (dist < reactionDistance) //reactionDistanceよりも小さかったら
         {
             isActive = true;    // アクティブにする（追いかける）
@@ -89,8 +89,8 @@ public class EnemyController : MonoBehaviour
 
             animator.SetInteger("Direction", direction);
             // 移動するベクトルを作る
-            axisH = Mathf.Cos(rad) * speed;
-            axisV = Mathf.Sin(rad) * speed;
+            axisH = Mathf.Cos(rad);
+            axisV = Mathf.Sin(rad);
         }
 
     }
@@ -114,7 +114,8 @@ public class EnemyController : MonoBehaviour
         if (isActive)
         {
             // 移動
-            rbody.linearVelocity = new Vector2(axisH, axisV).normalized;
+            rbody.linearVelocity = (new Vector2(axisH, axisV).normalized) * speed;
+
         }
         else
         {
