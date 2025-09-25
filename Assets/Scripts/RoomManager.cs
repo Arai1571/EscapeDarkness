@@ -20,7 +20,6 @@ public class RoomManager : MonoBehaviour
 
     GameObject player;   //プレイヤーの情報
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         //プレイヤー情報の取得
@@ -38,6 +37,9 @@ public class RoomManager : MonoBehaviour
             LoadKeysPosition(); //キーの配置の再現
             LoadItemsPosition(); //アイテムの配置の再現
             LoadDoorsPosition(); //ドアの配置の再現
+
+            PlayerPosition();  //プレイヤーの配置
+
         }
     }
     void StartKeysPosition()
@@ -209,7 +211,6 @@ public class RoomManager : MonoBehaviour
 
             //数字がマッチしていなければこれまで何も配置されていないということなのでダミードアを配置
             if (!match) Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
-
         }
     }
 
@@ -330,7 +331,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
-        
+
         //ダミー扉の生成
         foreach (GameObject spots in roomSpots)
         {
@@ -348,6 +349,36 @@ public class RoomManager : MonoBehaviour
 
             //数字がマッチしていなければこれまで何も配置されていないということなのでダミードアを配置
             if (!match) Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
+        }
+    }
+
+    //Playerの配置
+    void PlayuerPosition()
+    {
+        //全Roomオブジェクトの取得
+        GameObject[] roomDatas = GameObject.FindGameObjectsWithTag("Room");
+
+        foreach (GameObject room in roomDatas)
+        {
+            //それぞれのRoomのRoomDataスクリプトの情報を変数rに代入
+            RoomData r = room.GetComponent<RoomData>();
+
+            //取得してきたRoomの識別名が「いま目標にしている行き先」の識別名（static変数）と同じなら
+            if (r.roomName == toRoomNumber)
+            {
+                float posY = 1.5f;  //最初は対象となるRoomの上座標
+                if (r.direction == DoorDirection.down)
+                {
+                    posY = 1.5f;  //もしdirectionがdown設定のRoomならプレイヤーの位置は下側になる
+                }
+
+                //プレイヤーの位置を決める
+                player.transform.position = new Vector2(
+                    room.transform.position.x,
+                    room.transform.position.y + posY
+                );
+                break;  //目的のRoomが見つかってチェックの必要性がなくなったのでforeachを中断する
+            }
         }
     }
 }
