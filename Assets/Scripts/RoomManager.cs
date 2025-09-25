@@ -39,7 +39,6 @@ public class RoomManager : MonoBehaviour
             LoadDoorsPosition(); //ドアの配置の再現
 
             PlayerPosition();  //プレイヤーの配置
-
         }
     }
     void StartKeysPosition()
@@ -353,7 +352,7 @@ public class RoomManager : MonoBehaviour
     }
 
     //Playerの配置
-    void PlayuerPosition()
+    void PlayerPosition()
     {
         //全Roomオブジェクトの取得
         GameObject[] roomDatas = GameObject.FindGameObjectsWithTag("Room");

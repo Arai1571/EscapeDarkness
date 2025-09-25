@@ -8,7 +8,8 @@ public class Narration : MonoBehaviour
     public MessageData message;
     public TextMeshProUGUI messageText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool isEnding; //エンディングシーンで使われるかどうか
+
     void Start()
     {
         StartCoroutine(TalkStart());
@@ -30,9 +31,18 @@ public class Narration : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(3.0f); //３秒待って
 
-        SceneManager.LoadScene("Main");
+        if (!isEnding)
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            SceneManager.LoadScene("Title");
+        }
+
+        SceneManager.LoadScene("Main"); //メインシーンへ移動
 
     }
 
