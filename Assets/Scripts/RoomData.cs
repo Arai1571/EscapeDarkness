@@ -21,7 +21,7 @@ public class RoomData : MonoBehaviour
 
     public bool isSavePoint; //セーブポイントに使われるスクリプトにするかどうか
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //相手がプレイヤーかつ自分がセーブポイントでなければ
         if (collision.gameObject.CompareTag("Player") && !isSavePoint)

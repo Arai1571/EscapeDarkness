@@ -121,7 +121,7 @@ public class BossController : MonoBehaviour
         rbody.linearVelocity = Vector2.zero;
         GameManager.gameState = GameState.ending;
         yield return new WaitForSeconds(10);
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Ending");
     }
 
     //攻撃　Attackアニメーションにつく

@@ -25,7 +25,7 @@ public class VirtualPad : MonoBehaviour
         downPos = Input.mousePosition;
     }
 
-    // ドラッグイベント
+    // ドラッグイベント、指の動きに合わせてプレイヤーを移動させる
     public void PadDrag()
     {
         // マウスポイントのスクリーン座標

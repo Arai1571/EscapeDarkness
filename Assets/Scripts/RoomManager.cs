@@ -368,7 +368,7 @@ public class RoomManager : MonoBehaviour
                 float posY = 1.5f;  //最初は対象となるRoomの上座標
                 if (r.direction == DoorDirection.down)
                 {
-                    posY = 1.5f;  //もしdirectionがdown設定のRoomならプレイヤーの位置は下側になる
+                    posY = -1.5f;  //もしdirectionがdown設定のRoomならプレイヤーの位置は下側になる
                 }
 
                 //プレイヤーの位置を決める
