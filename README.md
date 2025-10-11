@@ -9,7 +9,6 @@ Escape Darkness は、暗闇の館を探索する 2DのRPG。
 
 ![ゲーム画面](ReadmeImg/main.png)
 =======
-![ゲーム画面](ReadmeImg/main.png)
 
 ### 操作方法
 * Eキー：次へ進む、落ちているノートを読む
@@ -47,7 +46,8 @@ Playerの角度を変えると、子オブジェクトのSpotLightも向きをQu
 プレイヤーの移動・アニメーション・ダメージ処理を制御。
 ダメージを受けた際は、Mathf.Sin を用いた点滅演出を実装。
 被弾中は SpriteRenderer の enabled を切り替えて点滅させる。
-'''C#
+
+```C#
 // ダメージ中の点滅処理
 if (inDamage)
 {
@@ -55,14 +55,14 @@ if (inDamage)
     gameObject.GetComponent<SpriteRenderer>().enabled = val > 0;
     return;
 }
-'''
+```
 
 * RoomManager.cs
 各部屋の鍵・アイテム・ドアをランダムに配置し、
 シーン遷移後も配置情報を再現する設計。
 配列とフラグを用いて配置済みを管理し、
 ダミードアを未使用スポットに自動生成。
-'''C#
+```C#
 // 重複しないランダム番号を抽選
 do
 {
@@ -79,14 +79,14 @@ if (!match)
 {
     Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
 }
-'''
+```
 
 * GameManager.cs
 ゲーム全体の状態管理・BGM制御・HP管理を統括。
 シーン名を判定して自動的にBGMを切り替え、
 playerHP を静的変数で保持することで
 シーン間での HP 引き継ぎを実現。
-'''C#
+```C#
 // シーンに応じたBGM再生
 switch (sceneName)
 {
@@ -96,14 +96,14 @@ switch (sceneName)
     case "Ending": SoundManager.instance.StopBgm(); break;
     default: SoundManager.instance.PlayBgm(BGMType.InGame); break;
 }
-'''
+```
 
 * BillData.cs / DrinkData.cs
 アイテムを取得した際、GameManager に
 状態を即時反映させる仕組みを採用。
 配列 itemsPickedState[] にフラグを保存して
 再ロード時のアイテム再配置を制御。
-'''C#
+```C#
 private void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.gameObject.CompareTag("Player"))
@@ -113,14 +113,13 @@ private void OnTriggerEnter2D(Collider2D collision)
         Destroy(gameObject);
     }
 }
-'''
+```
 
 * BossController.cs
-一定間隔で弾を発射し、
-弾速・発射間隔を調整可能に設計。
+一定間隔で弾を発射し、弾速・発射間隔を調整可能に設計。
 HP が 0 になると GameState を gameclear に変更し、
 エンディングへ遷移。
-'''C#
+```C#
 // 弾の発射
 if (fireTimer >= fireInterval)
 {
@@ -128,14 +127,14 @@ if (fireTimer >= fireInterval)
     bullet.GetComponent<Rigidbody2D>().velocity = dir.normalized * shootSpeed;
     fireTimer = 0f;
 }
-'''
+```
 
 * ChangeScene.cs
 ドアの OnTriggerEnter2D によって
 シーンを自動で切り替えるトリガー制御。
 直前のドア情報を RoomManager.toRoomNumber に保存し、
 遷移先シーンでの正しいプレイヤー位置を再現。
-'''C#
+```C#
 private void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.gameObject.CompareTag("Player"))
@@ -144,14 +143,7 @@ private void OnTriggerEnter2D(Collider2D collision)
         SceneManager.LoadScene(sceneName);
     }
 }
-'''
-
-
-
-
-
-
-
+```
 ## 今後の展望
 * 難易度や楽しさの調整（敵の種類を増やす・攻撃アイテムのバリエーションを増やす）
 * ボイス・環境音の追加による没入感の強化
