@@ -1,11 +1,12 @@
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     public static int[] doorsPositionNumber = { 0, 0, 0 }; //各入り口の配置番号
     public static int key1PositionNumber;   //鍵１の配置番号
-    public static int[] itemsPositionNumber = { 0, 0, 0, 0, 0 ,0}; //アイテムの配置番号
+    public static int[] itemsPositionNumber = { 0, 0, 0, 0, 0, 0 }; //アイテムの配置番号
 
     public GameObject[] items = new GameObject[6];     //6つのアイテムプレハブの内訳
 
@@ -19,6 +20,8 @@ public class RoomManager : MonoBehaviour
     public static string toRoomNumber = "fromRoom1"; //Playerが配置されるべき位置
 
     GameObject player;   //プレイヤーの情報
+
+    public static bool isNewGame = true;//新規ゲーム開始かどうかを示すフラグ
 
     void Awake()
     {
@@ -37,9 +40,39 @@ public class RoomManager : MonoBehaviour
             LoadKeysPosition(); //キーの配置の再現
             LoadItemsPosition(); //アイテムの配置の再現
             LoadDoorsPosition(); //ドアの配置の再現
-
-            PlayerPosition();  //プレイヤーの配置
         }
+    }
+
+    void Start()
+    {
+        //プレイヤー情報を取得
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // もしドア移動やセーブポイント復帰をした場合（新規ゲームではない）のplayerの出現位置
+        if ((toRoomNumber.StartsWith("Room") || toRoomNumber == "SavePoint" || toRoomNumber.StartsWith("fromRoom")) && !isNewGame)
+        {
+            PlayerPosition();
+        }
+        else
+        {
+            //タイトル画面から来た最初の一回だけStartPointを使う
+            GameObject start = GameObject.FindGameObjectWithTag("StartPoint");
+
+            if (player != null && start != null)
+            {
+                player.transform.position = start.transform.position;
+            }
+            if (Camera.main != null)
+            {
+                Camera.main.transform.position = new Vector3(
+                    start.transform.position.x,
+                    start.transform.position.y,
+                    Camera.main.transform.position.z
+                );
+            }
+        }
+        // 新規開始処理が終わったので false にする
+        isNewGame = false;
     }
     void StartKeysPosition()
     {

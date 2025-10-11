@@ -54,12 +54,25 @@ public class GameManager : MonoBehaviour
                 SoundManager.instance.PlayBgm(BGMType.InGame);
                 break;
         }
+
+        //Endingシーンに入ったら即 gameclear 扱いにする
+        if (sceneName == "Ending")
+        {
+            gameState = GameState.gameclear;
+            StartCoroutine(ReturnToOpening());
+        }
+    }
+
+    IEnumerator ReturnToOpening()
+    {
+        yield return new WaitForSeconds(5f); // 演出が終わるまでの時間調整
+        SceneManager.LoadScene("Opening");
     }
 
     public void Update()
     {
         //ゲームオーバーになったらタイトルに戻る
-        if (gameState == GameState.gameover)
+        if (gameState == GameState.gameover || gameState == GameState.gameclear)
         {
             //時間差でシーン切り替え
             StartCoroutine(TitleBack());

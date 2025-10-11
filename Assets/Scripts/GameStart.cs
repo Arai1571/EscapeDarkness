@@ -7,6 +7,8 @@ public class GameStart : MonoBehaviour
     {
         //ゲームの初期化
         PlayerPrefs.DeleteAll();
+        RoomManager.isNewGame = true;   // ← 新規ゲーム扱いにする
+        RoomManager.toRoomNumber = "fromRoom1"; // 初期値はそのままでOK
         SceneManager.LoadScene("Opening");
     }
 
@@ -15,6 +17,8 @@ public class GameStart : MonoBehaviour
         RoomManager.toRoomNumber = "SavePoint";
         //ゲームのローディング
         SaveData.LoadGameData();
+        //コンティニュー時にHPを回復
+        GameManager.playerHP = 3;
         SceneManager.LoadScene("Main");
     }
 
