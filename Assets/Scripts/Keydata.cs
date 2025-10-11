@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 //自作のキーを判別する型
@@ -19,10 +19,12 @@ public class KeyData : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         rbody.bodyType = RigidbodyType2D.Static;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            //keyのType次第で該当する鍵の所持数を増やす
             switch (keyType)
             {
                 case KeyType.key1:
@@ -38,11 +40,12 @@ public class KeyData : MonoBehaviour
                     GameManager.keysPickedState[2] = true;
                     break;
             }
+
+            //取得演出
+            GetComponent<CircleCollider2D>().enabled = false;
+            rbody.bodyType = RigidbodyType2D.Dynamic;
+            rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+            Destroy(gameObject, 0.5f);
         }
-        //取得演出
-        GetComponent<CircleCollider2D>().enabled = false;
-        rbody.bodyType = RigidbodyType2D.Dynamic;
-        rbody.AddForce(new Vector2(0, 5),ForceMode2D.Impulse);
-        Destroy(gameObject, 0.5f);
     }
 }

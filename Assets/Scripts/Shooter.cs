@@ -36,7 +36,7 @@ public class Shooter : MonoBehaviour
         //Rotationが扱っているQuaternion型として準備
         Quaternion q = quaternion.Euler(0, 0, angleZ);
 
-        //生成　※お札、プレイヤーの位置、プレイヤーと同じ角度
+        //生成※お札、プレイヤーの位置、プレイヤーと同じ角度
         GameObject obj = Instantiate(billPrefab, transform.position, q);
 
         //生成したオブジェクトのRigidbody2Dの情報を取得

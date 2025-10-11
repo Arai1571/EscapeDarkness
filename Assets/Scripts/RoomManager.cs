@@ -5,9 +5,9 @@ public class RoomManager : MonoBehaviour
 {
     public static int[] doorsPositionNumber = { 0, 0, 0 }; //各入り口の配置番号
     public static int key1PositionNumber;   //鍵１の配置番号
-    public static int[] itemsPositionNumber = { 0, 0, 0, 0, 0 }; //アイテムの配置番号
+    public static int[] itemsPositionNumber = { 0, 0, 0, 0, 0 ,0}; //アイテムの配置番号
 
-    public GameObject[] items = new GameObject[5];     //５つのアイテムプレハブの内訳
+    public GameObject[] items = new GameObject[6];     //6つのアイテムプレハブの内訳
 
     public GameObject room;      //ドアのプレハブ
     public MessageData[] messages;  //配置したドアに割り振るScriptableObject
