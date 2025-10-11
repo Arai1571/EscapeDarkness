@@ -8,7 +8,7 @@ Escape Darkness は、暗闇の館を探索する 2DのRPG。
 [ゲームのサンプルプレイはこちら]( https://arai1571.github.io/EscapeDarkness_web/)
 
 ![ゲーム画面](ReadmeImg/main.png)
-![ゲーム画面](ReadmeImg/ boss.png)
+![ゲーム画面](ReadmeImg/boss.png)
 =======
 
 ### 操作方法
@@ -150,5 +150,6 @@ private void OnTriggerEnter2D(Collider2D collision)
 * ボイス・環境音の追加による没入感の強化
 * 地図上を通過したら自動でマップが作成されていくマップの実装
 * 複数エンディング分岐
+
 
 
