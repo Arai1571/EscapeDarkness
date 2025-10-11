@@ -8,6 +8,7 @@ Escape Darkness は、暗闇の館を探索する 2DのRPG。
 [ゲームのサンプルプレイ]( https://arai1571.github.io/EscapeDarkness_web/)
 
 ![ゲーム画面](ReadmeImg/main.png)
+![ゲーム画面](ReadmeImg/boss/png)
 =======
 
 ### 操作方法
