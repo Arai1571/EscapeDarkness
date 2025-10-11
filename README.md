@@ -1,5 +1,5 @@
-# BattleCart
-## Battle Cartについて
+# 
+## Escape Darknessについて
 プレイヤーとなるカートを操作して走行距離の記録を伸ばしていく3Dゲームです。
 ステージの奥から敵が迫ってくるのであたらないように避けながら進みます。
   
@@ -7,7 +7,7 @@
 一瞬でクラッシュしてしまうスリルが癖になるように作りました。
 
 ## ゲームプレイ方法
-[ゲームのサンプルプレイ](https://arai1571.github.io/BattleCart_web/)
+[ゲームのサンプルプレイ]( https://arai1571.github.io/EscapeDarkness_web/)
 
 <<<<<<< HEAD
 ![ゲーム画面](ReadmeImg/battlecart.jpg)
@@ -138,3 +138,4 @@ IEnumerator RecoverPower()
 
 
 >>>>>>> 4d63bf0d2bfbc2324d9aea5f4005dda13da384f1
+
