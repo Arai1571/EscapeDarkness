@@ -47,14 +47,108 @@ Playerの角度を変えると、子オブジェクトのSpotLightも向きをQu
 プレイヤーの移動・アニメーション・ダメージ処理を制御。
 ダメージを受けた際は、Mathf.Sin を用いた点滅演出を実装。
 被弾中は SpriteRenderer の enabled を切り替えて点滅させる。
-'
+'''C#
 // ダメージ中の点滅処理
 if (inDamage)
 {
     float val = Mathf.Sin(Time.time * 50);
     gameObject.GetComponent<SpriteRenderer>().enabled = val > 0;
     return;
-'
+}
+'''
+
+* RoomManager.cs
+各部屋の鍵・アイテム・ドアをランダムに配置し、
+シーン遷移後も配置情報を再現する設計。
+配列とフラグを用いて配置済みを管理し、
+ダミードアを未使用スポットに自動生成。
+'''C#
+// 重複しないランダム番号を抽選
+do
+{
+    unique = true;
+    rand = Random.Range(1, (itemSpots.Length + 1));
+    foreach (int numbers in itemsPositionNumber)
+    {
+        if (numbers == rand) unique = false;
+    }
+} while (!unique);
+
+// 設置済み以外のスポットにダミードアを生成
+if (!match)
+{
+    Instantiate(dummyDoor, spots.transform.position, Quaternion.identity);
+}
+'''
+
+* GameManager.cs
+ゲーム全体の状態管理・BGM制御・HP管理を統括。
+シーン名を判定して自動的にBGMを切り替え、
+playerHP を静的変数で保持することで
+シーン間での HP 引き継ぎを実現。
+'''C#
+// シーンに応じたBGM再生
+switch (sceneName)
+{
+    case "Title": SoundManager.instance.PlayBgm(BGMType.Title); break;
+    case "Boss": SoundManager.instance.PlayBgm(BGMType.InBoss); break;
+    case "Opening":
+    case "Ending": SoundManager.instance.StopBgm(); break;
+    default: SoundManager.instance.PlayBgm(BGMType.InGame); break;
+}
+'''
+
+* BillData.cs / DrinkData.cs
+アイテムを取得した際、GameManager に
+状態を即時反映させる仕組みを採用。
+配列 itemsPickedState[] にフラグを保存して
+再ロード時のアイテム再配置を制御。
+'''C#
+private void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
+    {
+        GameManager.bill++;
+        GameManager.itemsPickedState[itemNum] = true;
+        Destroy(gameObject);
+    }
+}
+'''
+
+* BossController.cs
+一定間隔で弾を発射し、
+弾速・発射間隔を調整可能に設計。
+HP が 0 になると GameState を gameclear に変更し、
+エンディングへ遷移。
+'''C#
+// 弾の発射
+if (fireTimer >= fireInterval)
+{
+    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+    bullet.GetComponent<Rigidbody2D>().velocity = dir.normalized * shootSpeed;
+    fireTimer = 0f;
+}
+'''
+
+* ChangeScene.cs
+ドアの OnTriggerEnter2D によって
+シーンを自動で切り替えるトリガー制御。
+直前のドア情報を RoomManager.toRoomNumber に保存し、
+遷移先シーンでの正しいプレイヤー位置を再現。
+'''C#
+private void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
+    {
+        RoomManager.toRoomNumber = nextRoomName;
+        SceneManager.LoadScene(sceneName);
+    }
+}
+'''
+
+
+
+
 
 
 
